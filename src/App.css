@@ -15,11 +15,18 @@ color:rgb(17, 17, 70) !important;
   margin: 10px;
   border-radius: 10px;
 }
-@media screen and (max-width: 1060px){
+@media screen and (max-width: 1060px) and(min-width:769px){
   .flex_container{
     max-width: 250px;
   min-width: 250px;
   }
+}
+@media  screen and (max-width:768px) {
+  .flex_container{
+    max-width: 200px;
+    min-width: 200px;
+  }
+  
 }
 .flex_container_unique{
   background-color: antiquewhite;
