@@ -10,10 +10,19 @@ color:rgb(17, 17, 70) !important;
 .flex_container{
   background-color: antiquewhite;
   color:cadetblue;
-  max-width: 400px;
-  min-width: 400px;
+  max-width: 300px;
+  min-width: 300px;
+  margin: 10px;
+  border-radius: 10px;
+}
+.flex_container_unique{
+  background-color: antiquewhite;
+  color:cadetblue;
+  max-width: 800px;
+  min-width: 800px;
   margin: 10px;
   border-radius: 15px;
+
 }
 .label{
   color:blue;
