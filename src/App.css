@@ -17,8 +17,8 @@ color:rgb(17, 17, 70) !important;
 }
 @media screen and (max-width: 1060px){
   .flex_container{
-    max-width: 300px;
-  min-width: 300px;
+    max-width: 250px;
+  min-width: 250px;
   }
 }
 .flex_container_unique{
