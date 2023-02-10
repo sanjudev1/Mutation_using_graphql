@@ -8,10 +8,10 @@
 color:rgb(17, 17, 70) !important; 
 }
 .flex_container{
-  background-color: antiquewhite;
-  color:cadetblue;
-  max-width: 300px;
-  min-width: 300px;
+  background-color:rgb(166, 22, 22);
+  color:rgb(13, 15, 15);
+  max-width: 400px;
+  min-width: 400px;
   margin: 10px;
   border-radius: 10px;
 }
