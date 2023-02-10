@@ -15,6 +15,12 @@ color:rgb(17, 17, 70) !important;
   margin: 10px;
   border-radius: 10px;
 }
+@media screen and (max-width: 910px){
+  .flex_container{
+    max-width: 300px;
+  min-width: 300px;
+  }
+}
 .flex_container_unique{
   background-color: antiquewhite;
   color:cadetblue;
