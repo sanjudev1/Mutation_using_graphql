@@ -50,11 +50,11 @@ const Home=()=> {
 //   }
 // ,{variables:{limit:number},notifyOnNetworkStatusChange: true,}
   
-const initial_query =useQuery(GET_SELECTED_MESSAGES,{variables:{limit:10},fetchPolicy:"network-only",notifyOnNetworkStatusChange: true,});
+const initial_query =useQuery(GET_SELECTED_MESSAGES,{variables:{limit:number},fetchPolicy:"network-only"});
 const [Subsequent, subsequent_query]= useLazyQuery(GET_SELECTED_MESSAGES,{fetchPolicy:"cache-and-network"});
 
 
-console.log(".....render")
+console.log(number)
 // if (networkStatus === NetworkStatus.refetch) return(console.log("Refetching")) ;
 if(initial_query.loading || subsequent_query.loading) return (<ClipLoader
   color="blue"
@@ -74,7 +74,7 @@ if(subsequent_query.error) return (<>{subsequent_query.error}</>)
      <div> 
       
       <label id="messages" htmlFor='message_options' className='label'>Message_Options</label>      
-        <select name="messages" id="mesage_options" onChange={(e)=>setNumber(e.target.value)}>
+        <select name="messages" id="mesage_options" onChange={(e)=>setNumber(parseInt(e.target.value))}>
 
         {SELECTED_MESSAGES.map(e=>
              <option  key={e.limit} value={e.limit} selected={e.limit==number}>
@@ -85,7 +85,8 @@ if(subsequent_query.error) return (<>{subsequent_query.error}</>)
         </select>
         
         
-        <button className='confirm_button' onClick={()=>Subsequent({variables:{limit:number}})}>enter</button>
+        {/* <button className='confirm_button' onClick={()=>Subsequent({variables:{limit:number}})}>enter</button> */}
+        
      </div>
      <div className='container'>
      
