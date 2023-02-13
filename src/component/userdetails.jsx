@@ -23,9 +23,9 @@ const {id} =useParams()
 
   const {data,loading,error}=useQuery(UNIQUE_MESSAGES,{variables:{
 
-    id:id,
+    id:id
     
-  }});
+  },fetchPolicy:"network-only"});
   
   if (loading) return <ClipLoader
   color="blue"
