@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { gql, useQuery } from '@apollo/client'
+import { gql, useLazyQuery, useQuery } from '@apollo/client'
 import Listitems from '../component/listitems'
 import "../App.css"
 import ClipLoader from "react-spinners/ClipLoader";
-import { NetworkStatus } from '@apollo/client';
 
 import "../App.css";
 // import Query from '../assets/Query';
@@ -11,7 +10,7 @@ import "../App.css";
 const GET_SELECTED_MESSAGES= gql`
 
 
-query hhgcfgvbhj($limit:Int){
+query message($limit:Int){
   
   messages(limit:$limit)
   {
@@ -31,7 +30,7 @@ query hhgcfgvbhj($limit:Int){
 
 
 const SELECTED_MESSAGES=[{
-  "limit":100 },{"limit":80},{"limit":50},{"limit":30},{"limit":70
+  "limit":10 },{"limit":20},{"limit":50},{"limit":80},{"limit":100
 }]
 
 
@@ -39,12 +38,25 @@ const SELECTED_MESSAGES=[{
 const Home=()=> {
 
   const [number,setNumber]=useState(100);
+
+//  const  eventHandler=(value)=>{
+//     setNumber(value)
+//   }
+//   const selection=(e)=>{
+//      if (e.target.value==number){
+//       console.log(true)
+//      }
+//      console.log(false)
+//   }
+// ,{variables:{limit:number},notifyOnNetworkStatusChange: true,}
   
-const {data,loading,refetch,error,networkStatus}=useQuery(GET_SELECTED_MESSAGES,{variables:{limit:number},notifyOnNetworkStatusChange: true,});
+const initial_query =useQuery(GET_SELECTED_MESSAGES,{variables:{limit:10},fetchPolicy:"network-only",notifyOnNetworkStatusChange: true,});
+const [Subsequent, subsequent_query]= useLazyQuery(GET_SELECTED_MESSAGES,{fetchPolicy:"cache-and-network"});
+
 
 console.log(".....render")
-if (networkStatus === NetworkStatus.refetch) return(console.log("Refetching")) ;
-if(loading) return (<ClipLoader
+// if (networkStatus === NetworkStatus.refetch) return(console.log("Refetching")) ;
+if(initial_query.loading || subsequent_query.loading) return (<ClipLoader
   color="blue"
   
   size={150}
@@ -52,7 +64,8 @@ if(loading) return (<ClipLoader
   data-testid="loader"
 />)
 
-if(error) return (<>{error}</>)
+if(initial_query.error ) return (<>{initial_query.error}</>)
+if(subsequent_query.error) return (<>{subsequent_query.error}</>)
 
 
 
@@ -60,10 +73,11 @@ if(error) return (<>{error}</>)
     <div>
      <div> 
       
-      <label id="messages" value="default_100" className='label'>Message_Options</label>      
-        <select name="messages" onChange={(e)=>refetch({variables:{limit:e.target.value}})}>
+      <label id="messages" htmlFor='message_options' className='label'>Message_Options</label>      
+        <select name="messages" id="mesage_options" onChange={(e)=>setNumber(e.target.value)}>
+
         {SELECTED_MESSAGES.map(e=>
-             <option  key={e.limit} value={e.limit}>
+             <option  key={e.limit} value={e.limit} selected={e.limit==number}>
                 {e.limit}
              </option>)
              
@@ -71,12 +85,18 @@ if(error) return (<>{error}</>)
         </select>
         
         
+        <button className='confirm_button' onClick={()=>Subsequent({variables:{limit:number}})}>enter</button>
      </div>
      <div className='container'>
      
     <div className='container'>
-    {data && <>
-        {data.messages.items.map((each) =>
+    {subsequent_query.data && <>
+        {subsequent_query.data.messages.items.map((each) =>
+          <Listitems key={each.id} list={each}/>
+        )}
+        </>}
+        {initial_query.data && <>
+        {initial_query.data.messages.items.map((each) =>
           <Listitems key={each.id} list={each}/>
         )}
         </>}

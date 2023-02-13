@@ -82,3 +82,9 @@ color:rgb(17, 17, 70) !important;
 .read-the-docs {
   color: #888;
 }
+.confirm_button{
+  color: blue;
+  background-color: none;
+  margin-left: 10px;
+
+}
