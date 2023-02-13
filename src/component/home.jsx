@@ -37,7 +37,7 @@ const SELECTED_MESSAGES=[{
 
 const Home=()=> {
 
-  const [number,setNumber]=useState(100);
+  const [number,setNumber]=useState(10);
 
 //  const  eventHandler=(value)=>{
 //     setNumber(value)
