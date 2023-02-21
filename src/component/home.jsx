@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { gql, useLazyQuery, useQuery } from '@apollo/client'
 import Listitems from '../component/listitems'
 import "../App.css"
 import ClipLoader from "react-spinners/ClipLoader";
+
+// import { useForm } from "react-hook-form";
 
 import "../App.css";
 // import Query from '../assets/Query';
@@ -38,6 +40,15 @@ const SELECTED_MESSAGES=[{
 const Home=()=> {
 
   const [number,setNumber]=useState(10);
+  
+  useEffect(()=>{
+    console.log("....useEffect is called")
+     const timerId=setInterval(()=>{
+      console.log("timer runs  every 10 sec...")
+        initial_query.refetch()
+     },10000)
+     return (()=>clearInterval(timerId))
+  },[])
 
 //  const  eventHandler=(value)=>{
 //     setNumber(value)
@@ -50,11 +61,13 @@ const Home=()=> {
 //   }
 // ,{variables:{limit:number},notifyOnNetworkStatusChange: true,}
   
-const initial_query =useQuery(GET_SELECTED_MESSAGES,{variables:{limit:number},fetchPolicy:"network-only"});
+const initial_query=useQuery(GET_SELECTED_MESSAGES,{variables:{limit:number}});
+// const {data,loading,error,refetch }=useQuery(GET_SELECTED_MESSAGES,{variables:{limit:number},fetchPolicy:"cache-and-network"});
 const [Subsequent, subsequent_query]= useLazyQuery(GET_SELECTED_MESSAGES,{fetchPolicy:"cache-and-network"});
 
 
 console.log(number)
+console.log("....fectching due to providing message options or may be due to poolInterval")
 // if (networkStatus === NetworkStatus.refetch) return(console.log("Refetching")) ;
 if(initial_query.loading || subsequent_query.loading) return (<ClipLoader
   color="blue"
@@ -67,11 +80,21 @@ if(initial_query.loading || subsequent_query.loading) return (<ClipLoader
 if(initial_query.error ) return (<>{initial_query.error}</>)
 if(subsequent_query.error) return (<>{subsequent_query.error}</>)
 
-
+// if (loading) return (<h1>loading....</h1>)
 
   return (
     <div>
      <div> 
+      
+
+
+  
+  
+  
+  
+    
+
+
       
       <label id="messages" htmlFor='message_options' className='label'>Message_Options</label>      
         <select name="messages" id="mesage_options" onChange={(e)=>setNumber(parseInt(e.target.value))}>

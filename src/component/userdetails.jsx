@@ -1,14 +1,28 @@
 import { useParams } from "react-router-dom"
-import {gql,useQuery} from '@apollo/client';
+import {gql,useQuery,useLazyQuery,useMutation} from '@apollo/client';
 import ClipLoader from "react-spinners/ClipLoader";
+import {useForm } from "react-hook-form"
+import "../App.css"
+import { useState } from "react";
 
+
+const UPDATE_MESSAGE =gql`
+mutation upadtemessage($data:updateMessageInput!){
+  updateMessage(input:$data){
+    id
+    body
+    subject
+    
+    
+  }
+}`
 
 const UNIQUE_MESSAGES=gql`
-
 query message_id($id:String!){
   message(id:$id){
     id
      body
+     subject
   is_solution
   
   }
@@ -16,36 +30,112 @@ query message_id($id:String!){
 `
 
 const UserDetails=()=>{
-   
-const {id} =useParams()
- console.log(id)
-   
 
-  const {data,loading,error}=useQuery(UNIQUE_MESSAGES,{variables:{
-
-    id:id
-    
-  },fetchPolicy:"network-only"});
+  const { register, formState: { errors }, handleSubmit } = useForm();
+  const [formData,setformdata] =useState(null)
+  const [responsedata,setresponseData] =useState(null)
   
-  if (loading) return <ClipLoader
+  // form submitiom......................
+  const onSubmit = (data) =>{
+    
+    updateData({variables:
+      {data:{id:data.id,subject:formData.subject,body:formData.body}}})
+  
+  };
+
+
+ 
+ // update data .............  
+ const [updateData] =useMutation(UPDATE_MESSAGE,{onCompleted :(data)=>{
+  console.log(formData)
+   setresponseData(data?.updateMessage)
+   setformdata({
+    ...data,body:"",id:"",subject:""
+  })},onError:(error)=>console.log(error)})
+ 
+  //fetch data using id........
+const {id} =useParams()
+const Querydata=useQuery(UNIQUE_MESSAGES,{variables:{
+    id:id 
+  },onCompleted : (Querydata) => {
+   
+    setformdata(Querydata?.message) 
+    // setformdata({id:data.message.id,subject:data.message.subject,body:data.message.body})}});
+  }
+  });
+ 
+  // loader..........
+  if (Querydata.loading) return <ClipLoader
   color="blue"
   size={150}
   width={100}
   aria-label="Loading Spinner"
-  data-testid="loader"
-/>
-  if(error) return <h1>{error}</h1>
+  data-testid="loader"/>
+ 
+  // error......
 
+  if(Querydata.error) return <h1>{Querydata.error}</h1>
+
+
+
+// return.....
     return(
         <>
-        {data && <>
+        <form onSubmit={handleSubmit(onSubmit)} className="form_tag" >
+          <label id="Id_tag">ID</label>
+      <input 
+        {...register("id", { required:true })} 
+        aria-invalid={errors.Id ? "true" : "false"} 
+        className="input_tag"
+        placeholder="Enter your ID"
+        value={Querydata?.data?.message?.id}
+        onChange={(e)=>setformdata({id:e.target.value})}
+        name="Id_tag"
+      />
+      {/* {errors.Id?.type === 'required' && <p role="alert">First name is required</p>} */}
+      <label id="subject_tag">SUBJECT</label>
+      <textarea
+        {...register("subject", { required :false})} 
+        aria-invalid={errors.subject ? "true" : "false"} 
+        className="input_tag"
+        placeholder="Subject required..."
+        value={formData?.subject}
+        onChange={(e)=>setformdata({...formData,subject:e.target.value})}
+        name="subject_tag"
+      />
+      {/* {errors.mail && <p role="alert">{errors.subject?.message}</p>} */}
+      <label id="body_tag">BODY</label>
+      <textarea {...register("body",{required:false})}
+      aria-invalid={errors.body?"true":"false"}
+      className="input_tag"
+      placeholder="Body required..."
+      value={formData?.body} 
+      onChange={(e)=>setformdata({...formData,body:e.target.value})}
+      name="body_tag"
+      
+      />
+      {/* {errors.body && <p role="alert">{errors.body?.message}</p>} */}
+      <input type="submit" className="submit_btn" />
+    </form>
+        {Querydata && <>
            <div className="flex_container_unique">
-            <h1>ID: {data.message.id}</h1>
-            <p>BODY: {data.message.body}</p>
-            <p>SOLUTION: {data.message.is_solution}</p>
+           {responsedata && <p className="response_data">The data is updated sucessfully the updated cache data is shown below</p>}
+            <h1>ID: {Querydata.data.message.id}</h1>
+            <p>BODY: {Querydata.data.message.body.substr(0,1200)}</p>
+            <p>SUBJECT: {Querydata.data.message.subject}</p>
+            <p>SOLUTION: {Querydata.data.message.is_solution ?"True":"False"}  </p>
            
             </div>
             </>}
+            
+            <>
+            {/* <h1>display response</h1>
+
+            <h1>{responsedata?.id}</h1>
+            <p>{responsedata?.subject}</p>
+            <p>{responsedata?.body}</p> */}
+            
+            </>
        
         </>
         

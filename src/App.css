@@ -85,6 +85,42 @@ color:rgb(17, 17, 70) !important;
 .confirm_button{
   color: blue;
   background-color: none;
-  margin-left: 10px;
+  margin-bottom: 10px;
+
+}
+.input_tag{
+  width: 350px;
+  padding: 10px;
+  margin-bottom: 7px;
+
+  
+  border-radius: 10px;
+}
+.form_tag{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
+  color: white;
+  background-color: black;
+  border-radius: 10px;
+  margin-left: 5px;
+  padding-left: 20px;
+}
+.submit_btn{
+  
+  width: 118px;
+  height: 44px;
+  border-radius: 8px;
+  color: blue;
+  
+  margin-left: 40%;
+  
+
+}
+.response_data{
+  font-family: "bree-serif";
+  color:green;
+  font-size: 25px;
 
 }
