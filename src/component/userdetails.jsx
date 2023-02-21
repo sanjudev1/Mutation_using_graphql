@@ -57,7 +57,7 @@ const UserDetails=()=>{
 const {id} =useParams()
 const Querydata=useQuery(UNIQUE_MESSAGES,{variables:{
     id:id 
-  },onCompleted : (Querydata) => {
+  },fetchPolicy:"cache-and-network",onCompleted : (Querydata) => {
    
     setformdata(Querydata?.message) 
     // setformdata({id:data.message.id,subject:data.message.subject,body:data.message.body})}});
@@ -82,6 +82,8 @@ const Querydata=useQuery(UNIQUE_MESSAGES,{variables:{
     return(
         <>
         <div className="Form_container">
+          <img className="image" src="https://cdn.pixabay.com/photo/2017/06/10/07/18/list-2389219_960_720.png" alt="image"/>
+          <div className="small_container">
         <h4 className="form_headline">Here you can update the subject and body by using the below form:-</h4>
         <form onSubmit={handleSubmit(onSubmit)} className="form_tag" >
         <h1 style={{alignSelf:"center"}}>Upadte your Data</h1>
@@ -124,9 +126,9 @@ const Querydata=useQuery(UNIQUE_MESSAGES,{variables:{
            <div className="flex_container_unique">
            {responsedata && <p className="response_data">The data is updated sucessfully the updated cache data is shown below</p>}
             <h1>ID: {Querydata.data.message.id}</h1>
-            <p>BODY: {Querydata.data.message.body.substr(0,1200)}</p>
-            <p>SUBJECT: {Querydata.data.message.subject}</p>
-            <p>SOLUTION: {Querydata.data.message.is_solution ?"True":"False"}  </p>
+            <h2>BODY: {Querydata.data.message.body.substr(0,1200)}</h2>
+            <h2>SUBJECT: {Querydata.data.message.subject}</h2>
+            <h2>SOLUTION: {Querydata.data.message.is_solution ?"True":"False"}  </h2>
            
             </div>
             </>}
@@ -139,6 +141,7 @@ const Querydata=useQuery(UNIQUE_MESSAGES,{variables:{
             <p>{responsedata?.body}</p> */}
             
             </>
+            </div>
             </div>
         </>
         

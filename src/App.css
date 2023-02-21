@@ -8,13 +8,13 @@
 color:rgb(17, 17, 70) !important; 
 }
 .flex_container{
- color:cadetblue;
-  background-color:rgb(254, 220, 172);
+ color:#606f8f;
+  background-color:rgb(236, 147, 164);
   max-width: 300px;
   min-width: 300px;
   margin: 10px;
   border-radius: 10px;
-  box-shadow: 2px 4px 8px 6px;
+  box-shadow: 1px 1px 2px 2px;
 }
 @media screen and (max-width: 1535px){
   .flex_container{
@@ -30,13 +30,13 @@ color:rgb(17, 17, 70) !important;
   
 }
 .flex_container_unique{
-  background-color: antiquewhite;
-  color:cadetblue;
+  color: rgb(177, 103, 6);
+  background-color:white;
   max-width: 800px;
   min-width: 800px;
   margin: 10px;
   border-radius: 15px;
-   box-shadow: 3px 4px 6px 9px;
+   box-shadow: 1px 0px 0px 1px;
 }
 .label{
   color:blue;
@@ -102,11 +102,12 @@ color:rgb(17, 17, 70) !important;
   flex-direction: column;
   justify-content: left;
   text-align: left;
-  color: rgb(40, 36, 41);
-  background-color: rgb(228, 89, 9);
-  border-radius: 10px;
-  margin-left: 5px;
+  color: rgb(17, 15, 15);
+  background-color: rgba(240, 76, 43, 0.966);
+  border-radius: 15px;
+  margin: 8px;
   padding-left: 20px;
+  
 }
 .submit_btn{
   
@@ -130,15 +131,32 @@ color:rgb(17, 17, 70) !important;
 }
 .form_headline{
   font-family: "bree-serif";
-  color:rgb(220, 21, 61);
+  color:rgb(34, 8, 99);
   font-size: 25px;
 }
+.image{
+  width: 50%;
+  height: 40%;
+}
 .Form_container{
-  background: url("https://media.istockphoto.com/id/1254646139/photo/comfortable-workplace-with-potted-plants-wall-organizer-pictures-and-computer.jpg?s=2048x2048&w=is&k=20&c=Bdoc6rwZbedgu9B47B-9HUQq3L9f7PjhBcNwW2qLy10=");
+  display: flex;
   
-  background-size: cover;
+  /* background-color: rgb(95, 242, 229); */
+  
+  
+   /* background: url("https://cdn.pixabay.com/photo/2017/06/10/07/18/list-2389219_960_720.png");
+   */
  
-  padding: 100px;
-  border-radius: 10px;
+  
 
+
+}
+.small_container{
+  display: flex;
+  
+  
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 3px 3px 2px;
 }
