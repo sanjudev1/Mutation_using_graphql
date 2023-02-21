@@ -14,6 +14,7 @@ color:rgb(17, 17, 70) !important;
   min-width: 300px;
   margin: 10px;
   border-radius: 10px;
+  box-shadow: 2px 4px 8px 6px;
 }
 @media screen and (max-width: 1535px){
   .flex_container{
@@ -35,7 +36,7 @@ color:rgb(17, 17, 70) !important;
   min-width: 800px;
   margin: 10px;
   border-radius: 15px;
-
+   box-shadow: 3px 4px 6px 9px;
 }
 .label{
   color:blue;
@@ -101,8 +102,8 @@ color:rgb(17, 17, 70) !important;
   flex-direction: column;
   justify-content: left;
   text-align: left;
-  color: white;
-  background-color: black;
+  color: rgb(40, 36, 41);
+  background-color: rgb(228, 89, 9);
   border-radius: 10px;
   margin-left: 5px;
   padding-left: 20px;
@@ -112,9 +113,11 @@ color:rgb(17, 17, 70) !important;
   width: 118px;
   height: 44px;
   border-radius: 8px;
-  color: blue;
+  color: white;
+  background-color: rgb(15, 190, 33);
   
   margin-left: 40%;
+  margin-bottom: 1%;
   
 
 }
@@ -122,5 +125,20 @@ color:rgb(17, 17, 70) !important;
   font-family: "bree-serif";
   color:green;
   font-size: 25px;
+
+
+}
+.form_headline{
+  font-family: "bree-serif";
+  color:rgb(220, 21, 61);
+  font-size: 25px;
+}
+.Form_container{
+  background: url("assets\istockphoto-1254646139-1024x1024.jpg");
+  
+  background-size: cover;
+ 
+  padding: 100px;
+  border-radius: 10px;
 
 }

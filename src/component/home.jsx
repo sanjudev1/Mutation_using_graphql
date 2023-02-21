@@ -86,16 +86,6 @@ if(subsequent_query.error) return (<>{subsequent_query.error}</>)
     <div>
      <div> 
       
-
-
-  
-  
-  
-  
-    
-
-
-      
       <label id="messages" htmlFor='message_options' className='label'>Message_Options</label>      
         <select name="messages" id="mesage_options" onChange={(e)=>setNumber(parseInt(e.target.value))}>
 

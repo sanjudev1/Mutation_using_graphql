@@ -81,7 +81,10 @@ const Querydata=useQuery(UNIQUE_MESSAGES,{variables:{
 // return.....
     return(
         <>
+        <div className="Form_container">
+        <h4 className="form_headline">Here you can update the subject and body by using the below form:-</h4>
         <form onSubmit={handleSubmit(onSubmit)} className="form_tag" >
+        <h1 style={{alignSelf:"center"}}>Upadte your Data</h1>
           <label id="Id_tag">ID</label>
       <input 
         {...register("id", { required:true })} 
@@ -136,7 +139,7 @@ const Querydata=useQuery(UNIQUE_MESSAGES,{variables:{
             <p>{responsedata?.body}</p> */}
             
             </>
-       
+            </div>
         </>
         
         
