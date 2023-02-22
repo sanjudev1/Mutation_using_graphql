@@ -47,7 +47,7 @@ const UserDetails=()=>{
  
  // update data .............  
  const [updateData] =useMutation(UPDATE_MESSAGE,{onCompleted :(data)=>{
-  console.log(formData)
+  console.log(data)
    setresponseData(data?.updateMessage)
    setformdata({
     ...data,body:"",id:"",subject:""

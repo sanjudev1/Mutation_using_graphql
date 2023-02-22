@@ -11,7 +11,6 @@ import "../App.css";
 
 const GET_SELECTED_MESSAGES= gql`
 
-
 query message($limit:Int){
   
   messages(limit:$limit)
@@ -42,7 +41,7 @@ const Home=()=> {
   const [number,setNumber]=useState(10);
   
   useEffect(()=>{
-    console.log("....useEffect is called")
+    
      const timerId=setInterval(()=>{
       console.log("timer runs  every 10 sec...")
         initial_query.refetch()
