@@ -36,10 +36,10 @@ const UserDetails=()=>{
   const [responsedata,setresponseData] =useState(null)
   
   // form submitiom......................
-  const onSubmit = (data) =>{
+  const onSubmit = () =>{
     
     updateData({variables:
-      {data:{id:data.id,subject:formData.subject,body:formData.body}}})
+      {data:{id:formData.id,subject:formData.subject,body:formData.body}}})
   
   };
 
@@ -51,19 +51,23 @@ const UserDetails=()=>{
    setresponseData(data?.updateMessage)
    setformdata({
     ...data,body:"",id:"",subject:""
-  })},onError:(error)=>console.log(error)})
+  })}
+ ,onError:(error)=>console.log(error)})
  
   //fetch data using id........
 const {id} =useParams()
+
 const Querydata=useQuery(UNIQUE_MESSAGES,{variables:{
     id:id 
-  },fetchPolicy:"cache-and-network",onCompleted : (Querydata) => {
+  },onCompleted : (Querydata) => {
    
     setformdata(Querydata?.message) 
     // setformdata({id:data.message.id,subject:data.message.subject,body:data.message.body})}});
+  },onError :(error)=>{
+    console.log(error)
   }
   });
- 
+  
   // loader..........
   if (Querydata.loading) return <ClipLoader
   color="blue"
@@ -105,7 +109,7 @@ const Querydata=useQuery(UNIQUE_MESSAGES,{variables:{
         className="input_tag"
         placeholder="Subject required..."
         value={formData?.subject}
-        onChange={(e)=>setformdata({...formData,subject:e.target.value})}
+        onChange={(e)=>setformdata({...formData,"subject":e.target.value})}
         name="subject_tag"
       />
       {/* {errors.mail && <p role="alert">{errors.subject?.message}</p>} */}
@@ -115,7 +119,7 @@ const Querydata=useQuery(UNIQUE_MESSAGES,{variables:{
       className="input_tag"
       placeholder="Body required..."
       value={formData?.body} 
-      onChange={(e)=>setformdata({...formData,body:e.target.value})}
+      onChange={(e)=>setformdata({...formData,"body":e.target.value})}
       name="body_tag"
       
       />
@@ -134,11 +138,11 @@ const Querydata=useQuery(UNIQUE_MESSAGES,{variables:{
             </>}
             
             <>
-            {/* <h1>display response</h1>
+            <h1>display response</h1>
 
             <h1>{responsedata?.id}</h1>
             <p>{responsedata?.subject}</p>
-            <p>{responsedata?.body}</p> */}
+            <p>{responsedata?.body}</p>
             
             </>
             </div>
