@@ -65,8 +65,8 @@ const initial_query=useQuery(GET_SELECTED_MESSAGES,{variables:{limit:number}});
 const [Subsequent, subsequent_query]= useLazyQuery(GET_SELECTED_MESSAGES,{fetchPolicy:"cache-and-network"});
 
 
-console.log(number)
-console.log("....fectching due to providing message options or may be due to poolInterval")
+
+
 // if (networkStatus === NetworkStatus.refetch) return(console.log("Refetching")) ;
 if(initial_query.loading || subsequent_query.loading) return (<ClipLoader
   color="blue"
