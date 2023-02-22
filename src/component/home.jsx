@@ -46,7 +46,7 @@ const Home=()=> {
      const timerId=setInterval(()=>{
       console.log("timer runs  every 10 sec...")
         initial_query.refetch()
-     },10000)
+     },100000)
      return (()=>clearInterval(timerId))
   },[])
 
