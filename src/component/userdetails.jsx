@@ -138,12 +138,12 @@ const Querydata=useQuery(UNIQUE_MESSAGES,{variables:{
             </>}
             
             <>
-            <h1>display response</h1>
+            {/* <h1>display response</h1>
 
             <h1>{responsedata?.id}</h1>
             <p>{responsedata?.subject}</p>
             <p>{responsedata?.body}</p>
-            
+             */}
             </>
             </div>
             </div>
